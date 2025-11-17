@@ -1,7 +1,12 @@
 import './App.css';
+import BookingView from './Views/BookingView';
 
 function App() {
-	return <div>"hello World!"</div>;
+	return (
+		<>
+			<BookingView />
+		</>
+	);
 }
 
 export default App;
