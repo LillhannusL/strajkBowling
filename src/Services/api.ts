@@ -30,7 +30,8 @@ export async function createBooking(booking: BookingRequest) {
 				},
 			}
 		);
-
+		console.log('api sent:', booking);
+		console.log('booking Request: ', res.data);
 		return res.data as BookingResponse;
 	} catch (error) {
 		console.log(error);
