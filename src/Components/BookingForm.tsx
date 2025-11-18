@@ -1,31 +1,17 @@
 import './BookingForm.css';
-import { useState } from 'react';
-import type {
-	BookingFormData,
-	BookingRequest,
-} from '../Utils/Interfaces/Index';
+import type { BookingFormData } from '../Utils/Interfaces/Index';
 
-function BookingForm() {
-	const [bookingForm, setBookingForm] = useState<BookingFormData>({
-		date: '',
-		time: '',
-		players: 0,
-		lanes: 1,
-		shoes: [],
-	});
-
-	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();
-		const bookingRequest: BookingRequest = {
-			when: `${bookingForm.date}T${bookingForm.time}`,
-			lanes: bookingForm.lanes,
-			people: bookingForm.players,
-			shoes: bookingForm.shoes,
-		};
-		console.log('Skickar form!', bookingRequest);
-	}
-
-	function handlePlayersChange(newPlayers: number) {
+interface BookingFormProps {
+	bookingForm: BookingFormData;
+	setBookingForm: React.Dispatch<React.SetStateAction<BookingFormData>>;
+	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+}
+function BookingForm({
+	bookingForm,
+	setBookingForm,
+	handleSubmit,
+}: BookingFormProps) {
+	function handlePlayersChange(newPlayers: number): void {
 		setBookingForm((prev) => ({
 			...prev,
 			players: newPlayers,
@@ -36,49 +22,57 @@ function BookingForm() {
 	return (
 		<section>
 			<form onSubmit={handleSubmit} className="Bookingform">
-				<label>Datum</label>
-				<input
-					type="date"
-					value={bookingForm.date}
-					onChange={(e) =>
-						setBookingForm((prev) => ({ ...prev, date: e.target.value }))
-					}
-				/>
+				<fieldset>
+					<legend>Date</legend>
+					<input
+						type="date"
+						value={bookingForm.date}
+						onChange={(e) =>
+							setBookingForm((prev) => ({ ...prev, date: e.target.value }))
+						}
+					/>
+				</fieldset>
+				<fieldset>
+					<legend>Time</legend>
+					<input
+						type="time"
+						value={bookingForm.time}
+						onChange={(e) =>
+							setBookingForm((prev) => ({ ...prev, time: e.target.value }))
+						}
+					/>
+				</fieldset>
 
-				<label>Tid</label>
-				<input
-					type="time"
-					value={bookingForm.time}
-					onChange={(e) =>
-						setBookingForm((prev) => ({ ...prev, time: e.target.value }))
-					}
-				/>
+				<fieldset>
+					<legend>Number of awesome bowlers</legend>
+					<input
+						type="number"
+						min="1"
+						value={bookingForm.players}
+						onChange={(e) => handlePlayersChange(Number(e.target.value))}
+					/>
+				</fieldset>
 
-				<label>Antal Spelare</label>
-				<input
-					type="number"
-					min="1"
-					value={bookingForm.players}
-					onChange={(e) => handlePlayersChange(Number(e.target.value))}
-				/>
+				<fieldset>
+					<legend>Number of lanes</legend>
+					<input
+						type="number"
+						min="1"
+						value={bookingForm.lanes}
+						onChange={(e) =>
+							setBookingForm((prev) => ({
+								...prev,
+								lanes: Number(e.target.value),
+							}))
+						}
+					/>
+				</fieldset>
 
-				<label>Banor</label>
-				<input
-					type="number"
-					min="1"
-					value={bookingForm.lanes}
-					onChange={(e) =>
-						setBookingForm((prev) => ({
-							...prev,
-							lanes: Number(e.target.value),
-						}))
-					}
-				/>
 				{bookingForm.shoes.map((size, index) => (
-					<div key={index}>
-						<label>Skostolek Spelare {index + 1}</label>
-						<input
-							type="number"
+					<fieldset key={index}>
+						<legend>shoe size / person {index + 1}</legend>
+						<select
+							// type="number"
 							value={size}
 							onChange={(e) => {
 								const newShoes = [...bookingForm.shoes];
@@ -88,8 +82,21 @@ function BookingForm() {
 									shoes: newShoes,
 								}));
 							}}
-						/>
-					</div>
+						>
+							<option value="35">35</option>
+							<option value="36">36</option>
+							<option value="37">37</option>
+							<option value="38">38</option>
+							<option value="39">39</option>
+							<option value="40">40</option>
+							<option value="41">41</option>
+							<option value="42">42</option>
+							<option value="43">43</option>
+							<option value="44">44</option>
+							<option value="45">45</option>
+							<option value="1">I have my own!</option>
+						</select>
+					</fieldset>
 				))}
 
 				<button type="submit">Striiike!</button>
