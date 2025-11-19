@@ -1,5 +1,7 @@
 import './BookingForm.css';
 import type { BookingFormData } from '../Utils/Interfaces/Index';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 interface BookingFormProps {
 	bookingForm: BookingFormData;
@@ -13,13 +15,15 @@ function BookingForm({
 	handleSubmit,
 }: BookingFormProps) {
 	function handlePlayersChange(newPlayers: number): void {
-		let nmbrOfLanes = Math.ceil(bookingForm.players / 4);
-		setBookingForm((prev) => ({
-			...prev,
-			players: newPlayers,
-			shoes: Array(newPlayers).fill(0),
-			lanes: nmbrOfLanes,
-		}));
+		setBookingForm((prev) => {
+			let nmbrOfLanes = Math.ceil(newPlayers / 4);
+			return {
+				...prev,
+				players: newPlayers,
+				shoes: Array(newPlayers).fill(0),
+				lanes: prev.lanes < nmbrOfLanes ? nmbrOfLanes : prev.lanes,
+			};
+		});
 	}
 
 	return (
@@ -27,22 +31,23 @@ function BookingForm({
 			<form onSubmit={handleSubmit} className="Bookingform">
 				<fieldset>
 					<legend>Date</legend>
-					<input
-						type="date"
-						value={bookingForm.date}
-						onChange={(e) =>
-							setBookingForm((prev) => ({ ...prev, date: e.target.value }))
-						}
+					<DatePicker
+						dateFormat="dd MMM"
+						onChange={(date) => setBookingForm((prev) => ({ ...prev, date }))}
+						selected={bookingForm.date}
 					/>
 				</fieldset>
 				<fieldset>
 					<legend>Time</legend>
-					<input
-						type="time"
-						step={900}
-						value={bookingForm.time}
-						onChange={(e) =>
-							setBookingForm((prev) => ({ ...prev, time: e.target.value }))
+					<DatePicker
+						selected={bookingForm.time}
+						showTimeSelect
+						showTimeSelectOnly
+						timeIntervals={15}
+						timeFormat="HH:mm"
+						dateFormat="HH:mm"
+						onChange={(date) =>
+							setBookingForm((prev) => ({ ...prev, time: date }))
 						}
 					/>
 				</fieldset>
@@ -52,6 +57,9 @@ function BookingForm({
 					<input
 						type="number"
 						value={bookingForm.players}
+						onFocus={(e) => {
+							if (e.target.value === '0') e.target.value = '';
+						}}
 						onChange={(e) => handlePlayersChange(Number(e.target.value))}
 					/>
 				</fieldset>
@@ -60,9 +68,7 @@ function BookingForm({
 					<legend>Number of lanes</legend>
 					<input
 						type="number"
-						min={Math.ceil(bookingForm.players / 4)}
 						value={bookingForm.lanes}
-						max={bookingForm.players}
 						onChange={(e) => {
 							setBookingForm((prev) => ({
 								...prev,

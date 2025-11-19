@@ -1,6 +1,6 @@
 export interface BookingFormData {
-	date: string;
-	time: string;
+	date: Date | null;
+	time: Date | null;
 	players: number;
 	lanes: number;
 	shoes: number[];
