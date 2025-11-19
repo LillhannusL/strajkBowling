@@ -1,4 +1,12 @@
+import { useBookingStore } from '../store/bookingStore';
+
 function ConfirmationView() {
+	const bookingResponse = useBookingStore((state) => state.bookingResponse);
+	if (!bookingResponse) return <p>No booking found</p>;
+
+	const { bookingDetails } = bookingResponse;
+	const { bookingId, lanes, people, price, when } = bookingDetails;
+
 	return (
 		<section>
 			<h1>SEE YOU SOON!</h1>
@@ -6,26 +14,25 @@ function ConfirmationView() {
 			<article className="bookingDetails">
 				<fieldset>
 					<legend>when</legend>
-					<p></p>
+					<p>{when}</p>
 				</fieldset>
 				<fieldset>
 					<legend>who</legend>
-					<p></p>
+					<p>{people}</p>
 				</fieldset>
 				<fieldset>
 					<legend>lanes</legend>
-					<p></p>
+					<p>{lanes}</p>
 				</fieldset>
 				<fieldset>
 					<legend>booking number</legend>
-					<p></p>
+					<p>{bookingId}</p>
 				</fieldset>
 			</article>
 			<article>
-				<p>total</p>
-				<p></p>
+				<p>total {price}</p>
 			</article>
-			<button>sweet, lets go!</button>
+			<button>sweet, lets go!</button> {/* ska leda tillbaka till booking*/}
 		</section>
 	);
 }

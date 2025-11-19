@@ -13,8 +13,13 @@ export interface BookingRequest {
 	shoes: number[];
 }
 
-export interface BookingResponse extends BookingRequest {
+export interface BookingDetails extends BookingRequest {
 	price: number;
-	id: string;
+	bookingId: string;
 	active: boolean;
+}
+
+export interface BookingResponse {
+	success: boolean;
+	bookingDetails: BookingDetails;
 }
