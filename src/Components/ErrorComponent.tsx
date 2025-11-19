@@ -17,7 +17,7 @@ function ErrorComponent({ isError, onClose }: ErrorComponentProps) {
 				className="ErrorModal"
 			>
 				<h2>Ett fel inträffade</h2>
-				<p>Något gick fel vid bokningen, vändlig försök igen!</p>
+				<p>Något gick fel vid bokningen, vänligen försök igen!</p>
 				<button onClick={onClose}>Stäng</button>
 			</ReactModal>
 		</>
