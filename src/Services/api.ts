@@ -33,8 +33,11 @@ export async function createBooking(booking: BookingRequest) {
 		console.log('api sent:', booking);
 		console.log('booking Request: ', res.data);
 		return res.data as BookingResponse;
-	} catch (error) {
-		console.log(error);
-		throw error;
+	} catch (error: any) {
+		const msg =
+			error.response?.data?.message ||
+			error.message ||
+			'Something went wrong with the booking request';
+		throw new Error(msg);
 	}
 }

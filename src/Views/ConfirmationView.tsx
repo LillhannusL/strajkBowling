@@ -7,6 +7,7 @@ function ConfirmationView() {
 	const { bookingDetails } = bookingResponse;
 	const { bookingId, lanes, people, price, when } = bookingDetails;
 
+	console.log(when);
 	return (
 		<section>
 			<h1>SEE YOU SOON!</h1>
