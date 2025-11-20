@@ -3,7 +3,7 @@ import './ErrorComponent.css';
 
 interface ErrorComponentProps {
 	isError: boolean;
-	message: string;
+	message: string | null;
 	onClose: () => void;
 }
 

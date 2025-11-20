@@ -31,7 +31,7 @@ function BookingView() {
 
 		const result = validateBooking(bookingForm);
 		if (!result.valid) {
-			setErrorMessage(result.message);
+			setErrorMessage(result.message ?? null);
 			setIsError(true);
 			return;
 		}

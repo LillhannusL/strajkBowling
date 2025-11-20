@@ -1,0 +1,36 @@
+.sideNav {
+	position: fixed;
+	width: 250px;
+	height: 100vh;
+	background-color: #111;
+	color: white;
+	left: 0;
+	top: 0;
+	transition: transform 0.3s ease;
+	transform: translateX(0);
+}
+
+.sideNav.closed {
+	transform: translateX(-100%);
+}
+
+.btn-close {
+	margin-left: auto;
+	background: none;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+
+.sidenav-nav {
+	list-style: none;
+	padding: 0;
+	margin: 20px 0;
+}
+
+.sidenav-nav-link {
+	color: white;
+	text-decoration: none;
+	padding: 10px;
+	display: block;
+}
