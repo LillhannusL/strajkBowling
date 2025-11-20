@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { useBookingStore } from '../store/bookingStore.ts';
 import { formatBookingWhen } from '../Utils/dateTime.ts';
 import { validateBooking } from '../Utils/bookingValidation.ts';
+import './BookingView.css';
+import PageHeader from '../Components/PageHeader/PageHeader.tsx';
 
 function BookingView() {
 	const navigate = useNavigate();
@@ -38,11 +40,13 @@ function BookingView() {
 
 		const when = formatBookingWhen(bookingForm.date!, bookingForm.time!);
 
+		const shoeNumbers = bookingForm.shoes.map((s) => s.id);
+
 		const bookingRequest: BookingRequest = {
 			when,
 			lanes: bookingForm.lanes,
 			people: bookingForm.players,
-			shoes: bookingForm.shoes,
+			shoes: shoeNumbers,
 		};
 
 		console.log('bookingRequest:', bookingRequest);
@@ -59,7 +63,10 @@ function BookingView() {
 	}
 
 	return (
-		<>
+		<article className="bookingview">
+			<section className="booking__header">
+				<PageHeader text="BOOKING" />
+			</section>
 			<BookingForm
 				bookingForm={bookingForm}
 				setBookingForm={setBookingForm}
@@ -70,7 +77,7 @@ function BookingView() {
 				message={errorMessage}
 				onClose={() => setIsError(false)}
 			/>
-		</>
+		</article>
 	);
 }
 

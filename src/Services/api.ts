@@ -11,7 +11,7 @@ export async function fetchApiKey() {
 	const response = await axios.get(
 		'https://731xy9c2ak.execute-api.eu-north-1.amazonaws.com/key'
 	);
-	apiKey = response.data.key;
+	apiKey = response.data.data.key;
 	return apiKey;
 }
 

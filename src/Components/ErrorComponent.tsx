@@ -9,7 +9,7 @@ interface ErrorComponentProps {
 
 function ErrorComponent({ isError, message, onClose }: ErrorComponentProps) {
 	return (
-		<>
+		<div className="error">
 			<ReactModal
 				isOpen={isError}
 				onRequestClose={onClose}
@@ -21,7 +21,7 @@ function ErrorComponent({ isError, message, onClose }: ErrorComponentProps) {
 				<p>{message}</p>
 				<button onClick={onClose}>Try Again</button>
 			</ReactModal>
-		</>
+		</div>
 	);
 }
 

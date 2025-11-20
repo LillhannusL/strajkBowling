@@ -2,6 +2,8 @@ import './BookingForm.css';
 import type { BookingFormData } from '../Utils/Interfaces/Index';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import ShoeDropDown from './ShoeDropDown/ShoeDropDown';
+import Button from './Button/Button';
 
 interface BookingFormProps {
 	bookingForm: BookingFormData;
@@ -27,89 +29,88 @@ function BookingForm({
 	}
 
 	return (
-		<section>
-			<form onSubmit={handleSubmit} className="Bookingform">
-				<fieldset>
-					<legend>Date</legend>
-					<DatePicker
-						dateFormat="dd MMM"
-						onChange={(date) => setBookingForm((prev) => ({ ...prev, date }))}
-						selected={bookingForm.date}
-					/>
-				</fieldset>
-				<fieldset>
-					<legend>Time</legend>
-					<DatePicker
-						selected={bookingForm.time}
-						showTimeSelect
-						showTimeSelectOnly
-						timeIntervals={15}
-						timeFormat="HH:mm"
-						dateFormat="HH:mm"
-						onChange={(date) =>
-							setBookingForm((prev) => ({ ...prev, time: date }))
-						}
-					/>
-				</fieldset>
-
-				<fieldset>
-					<legend>Number of awesome bowlers</legend>
-					<input
-						type="number"
-						value={bookingForm.players}
-						onFocus={(e) => {
-							if (e.target.value === '0') e.target.value = '';
-						}}
-						onChange={(e) => handlePlayersChange(Number(e.target.value))}
-					/>
-				</fieldset>
-
-				<fieldset>
-					<legend>Number of lanes</legend>
-					<input
-						type="number"
-						value={bookingForm.lanes}
-						onChange={(e) => {
-							setBookingForm((prev) => ({
-								...prev,
-								lanes: Number(e.target.value),
-							}));
-						}}
-					/>
-				</fieldset>
-
-				{bookingForm.shoes.map((size, index) => (
-					<fieldset key={index}>
-						<legend>shoe size / person {index + 1}</legend>
-						<select
-							value={size}
-							onChange={(e) => {
-								const newShoes = [...bookingForm.shoes];
-								newShoes[index] = Number(e.target.value);
-								setBookingForm((prev) => ({
-									...prev,
-									shoes: newShoes,
-								}));
-							}}
-						>
-							<option value={0}>Choose Size</option>
-							<option value={35}>35</option>
-							<option value={36}>36</option>
-							<option value={37}>37</option>
-							<option value={38}>38</option>
-							<option value={39}>39</option>
-							<option value={40}>40</option>
-							<option value={41}>41</option>
-							<option value={42}>42</option>
-							<option value={43}>43</option>
-							<option value={44}>44</option>
-							<option value={45}>45</option>
-							<option value={1}>I have my own!</option>
-						</select>
+		<section className="Bookingform">
+			<form onSubmit={handleSubmit} className="Bookingform__form">
+				<section className="bookingform__top">
+					<p className="divider">WHEN, WHAT & WHO</p>
+					<div className="bookinform__date">
+						<fieldset>
+							<legend>DATE</legend>
+							<DatePicker
+								className="datepicker-input"
+								dateFormat="dd MMM"
+								onChange={(date) =>
+									setBookingForm((prev) => ({ ...prev, date }))
+								}
+								selected={bookingForm.date}
+							/>
+						</fieldset>
+						<fieldset>
+							<legend>TIME</legend>
+							<DatePicker
+								className="datepicker-input"
+								calendarClassName="datepicker-popup"
+								selected={bookingForm.time}
+								showTimeSelect
+								showTimeSelectOnly
+								timeIntervals={15}
+								timeFormat="HH:mm"
+								dateFormat="HH:mm"
+								onChange={(date) =>
+									setBookingForm((prev) => ({ ...prev, time: date }))
+								}
+							/>
+						</fieldset>
+					</div>
+					<fieldset>
+						<legend>NUMBER OF AWESOME BOWLERS</legend>
+						<div className="booking__inputAndLabel">
+							<input
+								type="number"
+								value={bookingForm.players}
+								onFocus={(e) => {
+									if (e.target.value === '0') e.target.value = '';
+								}}
+								onChange={(e) => handlePlayersChange(Number(e.target.value))}
+							/>
+							<span>pers</span>
+						</div>
 					</fieldset>
-				))}
+					<fieldset>
+						<legend>NUMBER OF LANES</legend>
+						<div className="booking__inputAndLabel">
+							<input
+								type="number"
+								value={bookingForm.lanes}
+								onChange={(e) => {
+									setBookingForm((prev) => ({
+										...prev,
+										lanes: Number(e.target.value),
+									}));
+								}}
+							/>
+							<span>lanes</span>
+						</div>
+					</fieldset>
+				</section>
 
-				<button type="submit">Striiike!</button>
+				<section className="bookingform__bottom">
+					<p className="divider">SHOES</p>
+					{bookingForm.shoes.map((size, index) => (
+						<fieldset key={index}>
+							<legend>SHOE SIZE / PERSON {index + 1}</legend>
+							<ShoeDropDown
+								value={size}
+								onChange={(newSize) => {
+									const newShoes = [...bookingForm.shoes];
+									newShoes[index] = newSize;
+									setBookingForm((prev) => ({ ...prev, shoes: newShoes }));
+								}}
+							/>
+						</fieldset>
+					))}
+				</section>
+				<Button text="STRIIIIIKE!" />
 			</form>
 		</section>
 	);
