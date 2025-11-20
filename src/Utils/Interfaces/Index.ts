@@ -1,16 +1,21 @@
+export interface ShoeOption {
+	id: number;
+	size: string;
+}
+
 export interface BookingFormData {
 	date: Date | null;
 	time: Date | null;
 	players: number;
 	lanes: number;
-	shoes: number[];
+	shoes: ShoeOption[];
 }
 
 export interface BookingRequest {
 	when: string;
 	lanes: number;
 	people: number;
-	shoes: number[];
+	shoes: Number[];
 }
 
 export interface BookingDetails extends BookingRequest {

@@ -1,0 +1,17 @@
+.header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.logo {
+	width: 25%;
+}
+
+.text {
+	font-family: 'Bebas Neue', sans-serif;
+	letter-spacing: 3px;
+	color: var(--pink);
+	font-size: 3.75rem;
+	font-weight: 100;
+}
