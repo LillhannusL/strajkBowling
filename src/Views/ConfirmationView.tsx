@@ -1,10 +1,11 @@
 import { useBookingStore } from '../store/bookingStore';
-import Button from '../Components/Button/Button';
 import PageHeader from '../Components/PageHeader/PageHeader';
 import './ConfirmationView.css';
 import type { BookingResponse } from '../Utils/Interfaces/Index';
+import { useNavigate } from 'react-router-dom';
 
 function ConfirmationView() {
+	const navigate = useNavigate();
 	const bookingResponse: BookingResponse | null = useBookingStore(
 		(state) => state.bookingResponse
 	);
@@ -51,6 +52,10 @@ function ConfirmationView() {
 		return { time, date };
 	}
 
+	function handeClick() {
+		navigate('/');
+	}
+
 	const result: { time: string; date: string } = formatDateString(when);
 
 	return (
@@ -94,7 +99,9 @@ function ConfirmationView() {
 				<p>{price}sek</p>
 			</article>
 
-			<Button text="SWEET! LETS GO!" />
+			<button className="btn" onClick={handeClick}>
+				SWEET!" LETS GO!
+			</button>
 		</section>
 	);
 }

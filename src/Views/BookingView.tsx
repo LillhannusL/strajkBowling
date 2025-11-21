@@ -21,7 +21,7 @@ function BookingView() {
 	const [bookingForm, setBookingForm] = useState<BookingFormData>({
 		date: null,
 		time: null,
-		players: 0,
+		players: null,
 		lanes: 1,
 		shoes: [],
 	});
@@ -50,7 +50,7 @@ function BookingView() {
 		const bookingRequest: BookingRequest = {
 			when,
 			lanes: bookingForm.lanes,
-			people: bookingForm.players,
+			people: bookingForm.players!,
 			shoes: shoeNumbers,
 		};
 

@@ -16,6 +16,8 @@ function BookingForm({
 	setBookingForm,
 	handleSubmit,
 }: BookingFormProps) {
+	const players = bookingForm.players ?? 0;
+
 	function handlePlayersChange(newPlayers: number): void {
 		setBookingForm((prev) => {
 			let nmbrOfLanes: number = Math.ceil(newPlayers / 4);
@@ -26,7 +28,7 @@ function BookingForm({
 					{ length: newPlayers },
 					(_, i) => prev.shoes[i] || { id: 0, size: '' }
 				),
-				lanes: prev.lanes < nmbrOfLanes ? nmbrOfLanes : prev.lanes,
+				lanes: nmbrOfLanes,
 			};
 		});
 	}
@@ -36,6 +38,7 @@ function BookingForm({
 			<form onSubmit={handleSubmit} className="Bookingform__form">
 				<section className="bookingform__top">
 					<p className="divider">WHEN, WHAT & WHO</p>
+
 					<div className="bookinform__date">
 						<fieldset>
 							<legend>DATE</legend>
@@ -48,6 +51,7 @@ function BookingForm({
 								selected={bookingForm.date}
 							/>
 						</fieldset>
+
 						<fieldset>
 							<legend>TIME</legend>
 							<DatePicker
@@ -65,16 +69,26 @@ function BookingForm({
 							/>
 						</fieldset>
 					</div>
+
 					<fieldset>
 						<legend>NUMBER OF AWESOME BOWLERS</legend>
 						<div className="booking__inputAndLabel">
 							<input
 								type="number"
-								value={bookingForm.players}
-								onFocus={(e) => {
-									if (e.target.value === '0') e.target.value = '';
+								value={bookingForm.players === null ? '' : bookingForm.players}
+								onChange={(e) => {
+									const value = e.target.value;
+									if (value === '') {
+										setBookingForm((prev) => ({
+											...prev,
+											players: null,
+											shoes: [],
+										}));
+										return;
+									}
+
+									handlePlayersChange(Number(value));
 								}}
-								onChange={(e) => handlePlayersChange(Number(e.target.value))}
 							/>
 							<span>pers</span>
 						</div>
@@ -97,10 +111,10 @@ function BookingForm({
 					</fieldset>
 				</section>
 
-				{bookingForm.players > 0 && (
+				{players > 0 && (
 					<section className="bookingform__bottom">
 						<p className="divider">SHOES</p>
-						{Array.from({ length: bookingForm.players }).map((_, index) => (
+						{Array.from({ length: players }).map((_, index) => (
 							<fieldset key={index}>
 								<legend>SHOE SIZE / PERSON {index + 1}</legend>
 								<ShoeDropDown
