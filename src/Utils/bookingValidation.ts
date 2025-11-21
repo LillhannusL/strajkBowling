@@ -31,7 +31,7 @@ export function validateBooking(booking: BookingFormData) {
 		return { valid: false, message: 'Lanes cannot be more than players' };
 	}
 
-	if (booking.shoes.some((s) => s === 0)) {
+	if (!booking.shoes.every((s) => s?.id > 0)) {
 		return { valid: false, message: 'All players must select shoe size' };
 	}
 

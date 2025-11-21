@@ -2,9 +2,12 @@ import { useBookingStore } from '../store/bookingStore';
 import Button from '../Components/Button/Button';
 import PageHeader from '../Components/PageHeader/PageHeader';
 import './ConfirmationView.css';
+import type { BookingResponse } from '../Utils/Interfaces/Index';
 
 function ConfirmationView() {
-	const bookingResponse = useBookingStore((state) => state.bookingResponse);
+	const bookingResponse: BookingResponse | null = useBookingStore(
+		(state) => state.bookingResponse
+	);
 
 	if (!bookingResponse) {
 		return (
@@ -17,19 +20,18 @@ function ConfirmationView() {
 		);
 	}
 
-	const { data } = bookingResponse;
-	const { bookingDetails } = data;
+	const { bookingDetails } = bookingResponse;
 	const { bookingId, lanes, people, price, when } = bookingDetails;
 
 	function formatDateString(when: string) {
 		const dateObj = new Date(when);
 
-		const hours = String(dateObj.getHours()).padStart(2, '0');
-		const min = String(dateObj.getMinutes()).padStart(2, '0');
-		const time = `${hours}:${min}`;
+		const hours: string = String(dateObj.getHours()).padStart(2, '0');
+		const min: string = String(dateObj.getMinutes()).padStart(2, '0');
+		const time: string = `${hours}:${min}`;
 
-		const day = dateObj.getDate();
-		const monthNames = [
+		const day: number = dateObj.getDate();
+		const monthNames: string[] = [
 			'Jan',
 			'Feb',
 			'Mar',
@@ -44,12 +46,12 @@ function ConfirmationView() {
 			'Dec',
 		];
 
-		const date = `${day} ${monthNames[dateObj.getMonth()]}`;
+		const date: string = `${day} ${monthNames[dateObj.getMonth()]}`;
 
 		return { time, date };
 	}
 
-	const result = formatDateString(when);
+	const result: { time: string; date: string } = formatDateString(when);
 
 	return (
 		<section className="confirmationView">
