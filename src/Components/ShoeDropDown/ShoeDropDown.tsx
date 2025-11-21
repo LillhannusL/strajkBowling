@@ -13,7 +13,7 @@ interface ShoeDropDownProps {
 	onChange: (value: ShoeOption) => void;
 }
 
-const shoeSizes = [
+const shoeSizes: ShoeOption[] = [
 	{ id: 35, size: 'Euro 35' },
 	{ id: 36, size: 'Euro 36' },
 	{ id: 37, size: 'Euro 37' },
@@ -35,7 +35,11 @@ function ShoeDropDown({ value, onChange }: ShoeDropDownProps) {
 				<ListboxButton className="shoe-button">{value.size}</ListboxButton>
 				<ListboxOptions className="shoe-options">
 					{shoeSizes.map((shoesize) => (
-						<ListboxOption key={shoesize.id} value={shoesize} className="shoe">
+						<ListboxOption
+							key={shoesize.id}
+							value={shoesize || { id: 0, size: '' }}
+							className="shoe"
+						>
 							{shoesize.size}
 						</ListboxOption>
 					))}

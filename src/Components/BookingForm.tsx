@@ -18,11 +18,14 @@ function BookingForm({
 }: BookingFormProps) {
 	function handlePlayersChange(newPlayers: number): void {
 		setBookingForm((prev) => {
-			let nmbrOfLanes = Math.ceil(newPlayers / 4);
+			let nmbrOfLanes: number = Math.ceil(newPlayers / 4);
 			return {
 				...prev,
 				players: newPlayers,
-				shoes: Array(newPlayers).fill(0),
+				shoes: Array.from(
+					{ length: newPlayers },
+					(_, i) => prev.shoes[i] || { id: 0, size: '' }
+				),
 				lanes: prev.lanes < nmbrOfLanes ? nmbrOfLanes : prev.lanes,
 			};
 		});
@@ -94,22 +97,25 @@ function BookingForm({
 					</fieldset>
 				</section>
 
-				<section className="bookingform__bottom">
-					<p className="divider">SHOES</p>
-					{bookingForm.shoes.map((size, index) => (
-						<fieldset key={index}>
-							<legend>SHOE SIZE / PERSON {index + 1}</legend>
-							<ShoeDropDown
-								value={size}
-								onChange={(newSize) => {
-									const newShoes = [...bookingForm.shoes];
-									newShoes[index] = newSize;
-									setBookingForm((prev) => ({ ...prev, shoes: newShoes }));
-								}}
-							/>
-						</fieldset>
-					))}
-				</section>
+				{bookingForm.players > 0 && (
+					<section className="bookingform__bottom">
+						<p className="divider">SHOES</p>
+						{Array.from({ length: bookingForm.players }).map((_, index) => (
+							<fieldset key={index}>
+								<legend>SHOE SIZE / PERSON {index + 1}</legend>
+								<ShoeDropDown
+									key={index}
+									value={bookingForm.shoes[index]}
+									onChange={(newSize) => {
+										const newShoes = [...bookingForm.shoes];
+										newShoes[index] = newSize;
+										setBookingForm((prev) => ({ ...prev, shoes: newShoes }));
+									}}
+								/>
+							</fieldset>
+						))}
+					</section>
+				)}
 				<Button text="STRIIIIIKE!" />
 			</form>
 		</section>
