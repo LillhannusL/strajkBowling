@@ -1,0 +1,40 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.ErrorModal {
+	background-color: var(--brown);
+	color: var(--pink);
+	padding: 2rem;
+	border-radius: 4px;
+	width: 100%;
+	/* margin: 1rem; */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	font-family: 'Work Sans', sans-serif;
+}
+
+.ErrorModal h2,
+.ErrorModal p {
+	background-color: var(--brown);
+}
+
+.ErrorModal button {
+	width: 7rem;
+	height: 2.5rem;
+	border-radius: 4px;
+	border: none;
+	background-color: var(--pink);
+	font-family: 'Work Sans', sans-serif;
+	color: var(--bg-white);
+	font-size: 0.9rem;
+	margin-top: 1.5rem;
+}

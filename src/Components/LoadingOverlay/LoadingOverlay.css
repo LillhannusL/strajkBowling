@@ -1,0 +1,27 @@
+.loading {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	height: 100vh;
+	background-color: var(--bg-white);
+}
+
+.loading h1 {
+	font-family: 'Bebas Neue', sans-serif;
+	color: var(--pink);
+	font-size: 4.3rem;
+	font-weight: 300;
+	letter-spacing: 2px;
+}
+
+.loading h5 {
+	font-family: 'Work Sans', sans-serif;
+	font-size: 1.2rem;
+	color: var(--purple);
+	font-weight: 400;
+	letter-spacing: 0.5rem;
+}

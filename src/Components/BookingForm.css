@@ -1,0 +1,105 @@
+.Bookingform {
+	width: 100%;
+	font-family: 'Work Sans', sans-serif;
+	color: var(--purple);
+}
+
+.Bookingform__form {
+	max-width: 100%;
+	margin: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.bookingform__top {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1.5rem;
+}
+
+.bookinform__date {
+	display: flex;
+	gap: 1.5rem;
+}
+
+fieldset {
+	width: 100%;
+	border-radius: 4px;
+	border: 1px solid var(--purple);
+	position: relative;
+}
+
+legend {
+	padding: 0 8px;
+	font-size: 1rem;
+}
+
+.datepicker-input,
+fieldset input,
+fieldset select {
+	width: 100%;
+	background-color: var(--bg-white);
+	color: var(--text-black);
+	font-size: 1.4rem;
+	font-family: 'Work Sans', sans-serif;
+	border: none;
+	outline: none;
+}
+
+fieldset:focus-within {
+	border-color: var(--pink);
+}
+
+fieldset:focus-within legend,
+fieldset:focus-within input {
+	color: var(--pink);
+}
+
+.divider {
+	width: 100%;
+	font-family: 'Bebas Neue', sans-serif;
+	font-size: 1.4rem;
+	font-weight: 100;
+	display: flex;
+	align-items: center;
+	color: var(--purple);
+	letter-spacing: 2px;
+}
+
+.divider::before,
+.divider::after {
+	flex: 1;
+	content: '';
+	padding: 0.5px;
+	background-color: var(--purple);
+	margin: 10px;
+}
+
+.booking__inputAndLabel {
+	display: flex;
+	align-items: center;
+	font-size: 1.4rem;
+	color: var(--text-black);
+}
+.booking__inputAndLabel input {
+	width: 2.5rem;
+}
+
+.bookingform__bottom {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+fieldset select {
+	max-height: 30px;
+	overflow-y: auto;
+}

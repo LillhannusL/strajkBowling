@@ -1,0 +1,75 @@
+.confirmationView {
+	min-height: 100vh;
+	padding: 1.5rem;
+	color: var(--text-black);
+	font-family: 'Work Sans', sans-serif;
+}
+
+.confirmationView__header {
+	padding-bottom: 3rem;
+}
+
+.bookingDetails__top {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin: 1rem 0;
+}
+
+.confirmationView fieldset {
+	padding: 0.7rem;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.confirmationView legend {
+	color: var(--purple);
+	font-size: 0.7rem;
+}
+
+.confirmation__text {
+	font-size: 1.2rem;
+}
+
+.confirmation__who,
+.confirmation__lanes {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.bookingDetails__bottom {
+	border: 1px solid var(--pink);
+	display: flex;
+	justify-content: space-between;
+	border-radius: 4px;
+	padding: 0.8rem;
+	margin: 3rem 0 1rem 0;
+	color: var(--pink);
+	font-size: 1.3rem;
+}
+
+.confirmation__total {
+	font-weight: 700;
+}
+
+.confirmationView__empty {
+	background-color: var(--brown);
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.emptyMessage {
+	background-color: var(--brown);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2rem;
+}
+
+.emptyMessage p {
+	background-color: var(--brown);
+	font-family: 'Bebas Neue', sans-serif;
+	color: var(--pink);
+	font-size: 3rem;
+}
