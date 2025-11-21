@@ -6,7 +6,7 @@ export interface ShoeOption {
 export interface BookingFormData {
 	date: Date | null;
 	time: Date | null;
-	players: number;
+	players: number | null;
 	lanes: number;
 	shoes: ShoeOption[];
 }
